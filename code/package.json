@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "nodejieba": "^2.2.4"
+  },
+  "dependencies": {
+    "express": "^4.14.1"
   }
 }
