@@ -44,6 +44,19 @@ const store = new Vuex.Store({
                 state.sessions = JSON.parse(data);
             }
         },
+        // 回覆
+        REPLY_MESSAGE({ sessions, currentSessionId }, content) {
+            let session = sessions.find(item => item.id === currentSessionId);
+            setTimeout(function() {
+                session.messages.push({
+                    content: `信用卡各卡權益說明：
+                              XX銀行推出多樣的信用卡，請參閱本行官網，選擇您的最佳信用卡，謝謝。
+                              ※欲知更多詳細資訊請`,
+                    date: new Date(),
+                    self: false
+                });
+            }, 1000)
+        },
         // 发送消息
         SEND_MESSAGE({ sessions, currentSessionId }, content) {
             let session = sessions.find(item => item.id === currentSessionId);
@@ -57,7 +70,7 @@ const store = new Vuex.Store({
         SELECT_SESSION(state, id) {
             state.currentSessionId = id;
         },
-        // 搜索
+        // 搜尋
         SET_FILTER_KEY(state, value) {
             state.filterKey = value;
         }
@@ -79,5 +92,6 @@ export const actions = {
     initData: ({ dispatch }) => dispatch('INIT_DATA'),
     sendMessage: ({ dispatch }, content) => dispatch('SEND_MESSAGE', content),
     selectSession: ({ dispatch }, id) => dispatch('SELECT_SESSION', id),
-    search: ({ dispatch }, value) => dispatch('SET_FILTER_KEY', value)
+    search: ({ dispatch }, value) => dispatch('SET_FILTER_KEY', value),
+    reply: ({ dispatch }, content) => dispatch('REPLY_MESSAGE', content)
 };

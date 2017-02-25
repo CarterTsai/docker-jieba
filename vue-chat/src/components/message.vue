@@ -52,19 +52,19 @@
 
 <style lang="less" scoped>
     .message {
-        padding: 10px 15px;
+        padding: 5px 10px;
         overflow-y: scroll;
         li {
             margin-bottom: 15px;
         }
         .time {
-            margin: 7px 0;
+            margin: 10px 0;
             text-align: center;
             >span {
                 display: inline-block;
-                padding: 0 18px;
-                font-size: 12px;
-                color: #fff;
+                padding: 0 10px;
+                font-size: 7px;
+                color: #000;
                 border-radius: 2px;
                 background-color: #dcdcdc;
             }

@@ -18,6 +18,7 @@
                 if (e.keyCode === 13 && this.content.length) {
                     this.sendMessage(this.content);
                     this.content = '';
+                    this.reply(this.content);
                 }
             }
         }
