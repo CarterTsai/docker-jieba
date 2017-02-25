@@ -3,7 +3,7 @@ info:
   version: "0.0.1"
   title: Hello World App
 # during dev, should point to your local machine
-host: localhost:10010
+host: localhost:3000
 # basePath prefixes all resource paths
 basePath: /
 #
@@ -25,22 +25,246 @@ paths:
       description: Returns 'Hello' to the caller
       # used as the method name of the controller
       operationId: cuts
+      consumes:
+        - application/json
       produces:
         - application/json
       parameters:
-        - name: name
+        - name: words
           in: body
-          description: The name of the person to whom to say hello
-          required: false
+          description: 要分詞的文字
+          required: true
           schema:
             type: string
-          
+            
+        - name: models
+          in: query
+          description: cut模式
+          required: false
+          type: boolean
+      
       responses:
         "200":
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
+            $ref: "#/definitions/CutWordsResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /cutAll:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: jieba_api
+    post:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: cutAll
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: words
+          in: body
+          description: 要分詞的文字
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CutWordsResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /cutHMM:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: jieba_api
+    post:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: cutHMM
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: words
+          in: body
+          description: 要分詞的文字
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CutWordsResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /cutForSearch:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: jieba_api
+    post:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: cutForSearch
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: words
+          in: body
+          description: 要分詞的文字
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CutWordsResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /cutSmall:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: jieba_api
+    post:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: cutSmall
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: words
+          in: body
+          description: 要分詞的文字
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CutWordsResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /tag:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: jieba_api
+    post:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: tag
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: words
+          in: body
+          description: 要分詞的文字
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CutWordsResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /extract:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: jieba_api
+    post:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: extract
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: words
+          in: body
+          description: 要分詞的文字
+          required: true
+          schema:
+            type: string
+            
+        - name: topN
+          in: query
+          description: topN
+          required: false
+          type: integer
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CutWordsResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /insertWord:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: jieba_api
+    post:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: insertWord
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: words
+          in: body
+          description: 要分詞的文字
+          required: true
+          schema:
+            type: string
+      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CutWordsResponse"
         # responses may fall through to errors
         default:
           description: Error
@@ -50,7 +274,7 @@ paths:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
+  CutWordsResponse:
     required:
       - message
     properties:

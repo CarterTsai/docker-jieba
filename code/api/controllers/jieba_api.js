@@ -11,7 +11,9 @@
   It is a good idea to list the modules that your application depends on in the package.json in the project root
  */
 var util = require('util');
-
+var nodejieba = require("nodejieba");
+/* Load Directorys */
+nodejieba.load();
 /*
  Once you 'require' a module you can reference the things that it exports.  These are defined in module.exports.
 
@@ -25,7 +27,14 @@ var util = require('util');
   we specify that in the exports of this module that 'hello' maps to the function named 'hello'
  */
 module.exports = {
-  cuts: cuts
+	cuts: cuts,
+	cutAll: cutAll,
+	cutHMM: cutHMM,
+	cutForSearch: cutForSearch,
+	cutSmall: cutSmall,
+	tag: tag,
+	extract: extract,
+	insertWord: insertWord
 };
 
 /*
@@ -35,11 +44,55 @@ module.exports = {
   Param 2: a handle to the response object
  */
 function cuts(req, res) {
-  // variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
-  console.log(req.swagger.params);
-  // var name = req.swagger.body.name.value || 'stranger';
-  // var hello = util.format('Hello, %s!', name);
+	// variables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
+	// console.log(req.swagger.params.words);
+	var words = req.swagger.params.words.value || '';
+	var models = req.swagger.params.models.value || false;
+	// var hello = util.format('Hello, %s!', name);
+	var result = nodejieba.cut(words, models);
+	// this sends back a JSON response which is a single string
+	res.json(result);
+}
 
-  // this sends back a JSON response which is a single string
-  res.json("testCuts");
+function cutAll(req, res) {
+	var words = req.swagger.params.words.value || '';
+    var result = nodejieba.cutAll(words);
+	res.json(result);
+}
+
+function cutHMM(req, res) {
+    var words = req.swagger.params.words.value || '';
+    var result = nodejieba.cutHMM(words);
+	res.json(result);
+}
+
+function cutForSearch(req, res) {
+    var words = req.swagger.params.words.value || '';
+    var result = nodejieba.cutForSearch(words);
+	res.json(result);
+}
+
+function cutSmall(req, res) {
+    var words = req.swagger.params.words.value || '';
+    var result = nodejieba.cutSmall(words);
+	res.json(result);
+}
+
+function tag(req, res) {
+    var words = req.swagger.params.words.value || '';
+    var result = nodejieba.tag(words);
+	res.json(result);
+}
+
+function extract(req, res) {
+    var words = req.swagger.params.words.value || '';
+    var topN = req.swagger.params.topN.value || 5;
+    var result = nodejieba.extract(words, topN);
+	res.json(result);
+}
+
+function insertWord(req, res) {
+    var words = req.swagger.params.words.value || '';
+    var result = nodejieba.insertWord(words);
+	res.json(result);
 }
