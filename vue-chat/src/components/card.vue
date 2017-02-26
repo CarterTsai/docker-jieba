@@ -38,7 +38,6 @@
 <style scoped lang="less">
     .card {
         padding: 12px;
-        border-bottom: solid 1px #24272C;
         header {
             text-align: center;
         }

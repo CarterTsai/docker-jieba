@@ -50,7 +50,7 @@
         }
         .sidebar {
             float: left;
-            width: 15%;
+            width: 20%;
             color: #f4f4f4;
             background-color: #2e3238;
         }

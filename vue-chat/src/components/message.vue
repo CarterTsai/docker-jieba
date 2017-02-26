@@ -54,6 +54,7 @@
     .message {
         padding: 5px 10px;
         overflow-y: scroll;
+        padding-bottom: 20px;
         li {
             margin-bottom: 15px;
         }
