@@ -13,7 +13,9 @@
 var util = require('util');
 var nodejieba = require("nodejieba");
 /* Load Directorys */
-nodejieba.load();
+nodejieba.load({
+  userDict: './dict.txt',
+});
 /*
  Once you 'require' a module you can reference the things that it exports.  These are defined in module.exports.
 
