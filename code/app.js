@@ -5,7 +5,15 @@ var app = require('express')();
 module.exports = app; // for testing
 
 var config = {
-  appRoot: __dirname // required config
+  appRoot: __dirname, // required config
+  swaggerSecurityHandlers : {
+      Authorization: function (req, authOrSecDef, scopesOrApiKey, cb) {
+          console.log(req);
+          console.log(authOrSecDef);
+          console.log(req.swagger.params);
+          cb(null);
+      }
+  }
 };
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
@@ -13,6 +21,18 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
 
   // enable SwaggerUI
   app.use(swaggerExpress.runner.swaggerTools.swaggerUi());
+
+  // enable oAuth2
+  // app.use(swaggerExpress.runner.swaggerTools.swaggerSecurity({
+  //   oauth2: function (req, def, scopes, callback) {
+  //     // Do real stuff here
+  //   }
+  // }));
+  //
+  // // Validate Swagger requests
+  // app.use(swaggerExpress.runner.swaggerTools.swaggerValidator({
+  //   validateResponse: true
+  // }));
 
   // install middleware
   swaggerExpress.register(app);

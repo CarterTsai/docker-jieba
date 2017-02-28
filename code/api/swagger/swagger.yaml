@@ -6,6 +6,26 @@ info:
 host: localhost:3000
 # basePath prefixes all resource paths
 basePath: /jieba
+
+securityDefinitions:
+  Authorization:
+    type: apiKey
+    in: header
+    name: authorization
+  # AdminSecurity:
+  #   type: apiKey
+  #   in: header
+  #   name: ADMIN-API-KEY
+  # MediaSecurity:
+  #   type: apiKey
+  #   in: header
+  #   name: SIMPLE-API-KEY
+# securityDefinitions:
+#   api_key:
+#     type: apiKey
+#     name: api_key
+#     in: header
+
 #
 schemes:
   # tip: remove http to make production-grade
@@ -17,6 +37,10 @@ schemes:
 # format of the responses to the client (Accepts)
 # produces:
 #   - application/json
+
+security:
+  - Authorization: [] 
+  
 paths:
   /cuts:
     # binds a127 app logic to a route
@@ -36,13 +60,13 @@ paths:
           required: true
           schema:
             type: string
-            
+
         - name: models
           in: query
           description: cut模式
           required: false
           type: boolean
-      
+
       responses:
         "200":
           description: Success
@@ -72,7 +96,7 @@ paths:
           required: true
           schema:
             type: string
-      
+
       responses:
         "200":
           description: Success
@@ -102,7 +126,7 @@ paths:
           required: true
           schema:
             type: string
-      
+
       responses:
         "200":
           description: Success
@@ -132,7 +156,7 @@ paths:
           required: true
           schema:
             type: string
-      
+
       responses:
         "200":
           description: Success
@@ -162,7 +186,7 @@ paths:
           required: true
           schema:
             type: string
-      
+
       responses:
         "200":
           description: Success
@@ -192,7 +216,7 @@ paths:
           required: true
           schema:
             type: string
-      
+
       responses:
         "200":
           description: Success
@@ -222,13 +246,13 @@ paths:
           required: true
           schema:
             type: string
-            
+
         - name: topN
           in: query
           description: topN
           required: false
           type: integer
-      
+
       responses:
         "200":
           description: Success
@@ -258,7 +282,7 @@ paths:
           required: true
           schema:
             type: string
-      
+
       responses:
         "200":
           description: Success
